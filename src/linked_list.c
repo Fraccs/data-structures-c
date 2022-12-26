@@ -6,35 +6,38 @@ LinkedList* linked_list_create() {
 
     linked_list->head = NULL;
     linked_list->length = 0;
+    linked_list->tail = NULL;
 
     return linked_list;
 }
 
 // Append a node to the tail of the LinkedList
 void linked_list_append(LinkedList* linked_list, int value) {
-    Node* temp = linked_list->head;
     Node* new = malloc(sizeof(Node));
+    Node* head = linked_list->head;
+    Node* tail = linked_list->tail;
 
     new->value = value;
     new->next = NULL;
 
-    // Empty LinkedList (just head)
+    // Empty LinkedList
     if(linked_list->head == NULL) {
         linked_list->head = new;
         linked_list->length++;
         return;
     }
 
-    // Non-Empty LinkedList
-    while(temp != NULL) {
-        if(temp->next == NULL) { // Found the tail
-            temp->next = new;
-            break;
-        }
-
-        temp = temp->next;
+    // 1-Element LinkedList
+    if(linked_list->tail == NULL) {
+        head->next = new;
+        linked_list->tail = new;
+        linked_list->length++;
+        return;
     }
 
+    // Non-Empty LinkedList
+    tail->next = new;
+    linked_list->tail = new;
     linked_list->length++;
 }
 
