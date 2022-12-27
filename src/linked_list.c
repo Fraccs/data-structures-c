@@ -43,29 +43,39 @@ void linked_list_append(LinkedList* linked_list, int value) {
 
 // Pop a node from the tail of the LinkedList
 void linked_list_pop(LinkedList* linked_list) {
-    Node* temp = linked_list->head;
-    Node* tail = NULL;
+    Node* head = linked_list->head;
+    Node* tail = linked_list->tail;
 
-    // Searching the tail
-    while(temp != NULL) {
-        if(temp->next == NULL) { // Found the tail
-            tail = temp;
-            break;
-        }
-
-        temp = temp->next;
+    // Empty LinkedList
+    if(linked_list->head == NULL) {
+        return;
     }
 
-    temp = linked_list->head;
+    // 1-Element LinkedList
+    if(linked_list->tail == NULL) {
+        free(linked_list->head);
+        linked_list->head = NULL;
+        linked_list->length--;
+        return;
+    }
 
-    while(temp != NULL) {
-        if(temp->next == tail) {
-            temp->next = NULL;
+    // Non-Empty LinkedList
+    while(head != NULL) {
+        if(head->next == tail) {
+            if(linked_list->length == 2) {
+                linked_list->tail = NULL;
+            }
+            else {
+                linked_list->tail = head;
+            }
+
             free(tail); // Deallocate the tail
+            head->next = NULL;
+
             break;
         }
 
-        temp = temp->next;
+        head = head->next;
     }
 
     linked_list->length--;
