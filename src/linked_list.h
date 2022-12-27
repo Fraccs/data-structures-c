@@ -12,6 +12,7 @@ typedef struct _Node {
 typedef struct _LinkedList {
     struct _Node* head;
     int length;
+    struct _Node* tail;
 } LinkedList;
 
 // Create a LinkedList

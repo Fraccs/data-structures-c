@@ -30,10 +30,10 @@
 
 > ##### Remove a node from the end of the `LinkedList`.
 
-- Prototype: `void linked_list_pop()`
+- Prototype: `void linked_list_pop(LinkedList*)`
 
 ### `linked_list_print`
 
 > ##### Print the content of the `LinkedList`.
 
-- Prototype: `void linked_list_print(LinkedList*)`
+- Prototype: `void linked_list_print(const LinkedList*)`
